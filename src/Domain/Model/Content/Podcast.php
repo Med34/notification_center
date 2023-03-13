@@ -10,6 +10,7 @@ final class Podcast
 
     public function __construct(
         private readonly string  $title,
+        private readonly string  $imageUrl,
         private readonly ?string $description,
         /** @var array<Artist> */
         private ?array           $artists = []
@@ -34,6 +35,11 @@ final class Podcast
     public function getArtists(): ?array
     {
         return $this->artists;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 
 }

@@ -20,11 +20,13 @@ final class AlbumNotification extends Notification
 
         if (
             $data['album_title']
+            && $data['album_image_url']
             && $data['album_released_date']
         ) {
             $album = new Album(
                 $data['album_title'],
-                new DateTime($data['album_released_date'])
+                new DateTime($data['album_released_date']),
+                $data['album_image_url']
             );
 
             if (
@@ -45,11 +47,9 @@ final class AlbumNotification extends Notification
     {
         $notification = parent::toArray($notification);
 
-        $notification['notif_content_type']  = 'album';
-        $notification['album_title']         = $this->album->getTitle();
-        $notification['album_released_date'] = $this->album->getReleasedDate();
-
-        $notification['album_artists'] = [];
+        $notification['album_title']     = $this->album->getTitle();
+        $notification['album_image_url'] = $this->album->getImageUrl();
+        $notification['album_artists']   = [];
 
         foreach ($this->album->getArtists() as $artist) {
             $notification['album_artists'][] = [

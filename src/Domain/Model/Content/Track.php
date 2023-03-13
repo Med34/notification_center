@@ -11,6 +11,7 @@ final class Track
     public function __construct(
         private readonly string $title,
         private readonly Album  $album,
+        private readonly string $imageUrl,
         private readonly ?int   $nbViews
     ) {
     }
@@ -28,6 +29,11 @@ final class Track
     public function getNbViews(): ?int
     {
         return $this->nbViews;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 
 }

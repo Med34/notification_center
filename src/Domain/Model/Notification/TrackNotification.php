@@ -21,12 +21,15 @@ final class TrackNotification extends Notification
 
         if (
             $data['track_title']
+            && $data['track_image_url']
             && $data['track_album_title']
             && $data['track_album_released_date']
+            && $data['track_album_image_url']
         ) {
             $album = new Album(
                 $data['track_album_title'],
-                new DateTime($data['track_album_released_date'])
+                new DateTime($data['track_album_released_date']),
+                $data['track_album_image_url']
             );
 
             if ($data['track_album_artist_name'] && $data['track_album_artist_firstname']) {
@@ -34,7 +37,7 @@ final class TrackNotification extends Notification
                 $album->addArtist($albumArtist);
             }
 
-            $this->track = new Track($data['track_title'], $album, $data['track_nb_views']);
+            $this->track = new Track($data['track_title'], $album, $data['track_image_url'], $data['track_nb_views']);
         }
 
         return $this;
@@ -44,8 +47,9 @@ final class TrackNotification extends Notification
     {
         $notification = parent::toArray($notification);
 
-        $notification['track_title']       = $this->track->getTitle();
-        $notification['track_album_title'] = $this->track->getAlbum()->getTitle();
+        $notification['track_title']           = $this->track->getTitle();
+        $notification['track_image_url']       = $this->track->getImageUrl();
+        $notification['track_album_title']     = $this->track->getAlbum()->getTitle();
 
         $notification['track_artists'] = [];
 

@@ -8,9 +8,9 @@ final class NotificationType
 {
 
     public const
-        PODCAST_TYPE = 'Podcast',
-        PLAYLIST_TYPE = 'Playlist',
-        ALBUM_TYPE = 'Album',
-        TRACK_TYPE = 'Track';
+        NEW_CONTENT = 'new content',
+        SHARING = 'sharing',
+        UPDATE = 'update',
+        RECOMMENDATION = 'recommendation';
 
 }

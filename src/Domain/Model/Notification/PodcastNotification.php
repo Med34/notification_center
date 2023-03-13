@@ -17,8 +17,8 @@ final class PodcastNotification extends Notification
     {
         parent::createFromArray($data);
 
-        if ($data['podcast_title']) {
-            $podcast = new Podcast($data['podcast_title'], $data['podcast_description']);
+        if ($data['podcast_title'] && $data['podcast_image_url']) {
+            $podcast = new Podcast($data['podcast_title'], $data['podcast_image_url'], $data['podcast_description']);
 
             if ($data['podcast_artist_name'] && $data['podcast_artist_firstname']) {
                 $artist = new Artist(
@@ -42,6 +42,7 @@ final class PodcastNotification extends Notification
 
         $notification['podcast_title']       = $this->podcast->getTitle();
         $notification['podcast_description'] = $this->podcast->getDescription();
+        $notification['podcast_image_url']   = $this->podcast->getImageUrl();
 
         $notification['podcast_artists'] = [];
 
@@ -53,4 +54,5 @@ final class PodcastNotification extends Notification
 
         return $notification;
     }
+
 }

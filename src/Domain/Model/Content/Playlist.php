@@ -11,6 +11,7 @@ final class Playlist
     public function __construct(
         private readonly string  $title,
         private readonly User    $user,
+        private readonly string  $imageUrl,
         private readonly ?string $description,
         private readonly ?int    $isPublic,
         /** @var array<Track> */
@@ -41,6 +42,11 @@ final class Playlist
     public function getIsPublic(): ?int
     {
         return $this->isPublic;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 
 }

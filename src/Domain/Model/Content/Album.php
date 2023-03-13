@@ -14,6 +14,7 @@ final class Album
     public function __construct(
         private readonly string   $title,
         private readonly DateTime $releasedDate,
+        private readonly string   $imageUrl,
         /** @var array<Artist> */
         private array             $artists = []
     ) {
@@ -40,6 +41,11 @@ final class Album
     public function getArtists(): array
     {
         return $this->artists;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 
 }

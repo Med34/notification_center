@@ -19,6 +19,7 @@ final class PlaylistNotification extends Notification
 
         if (
             $data['playlist_title']
+            && $data['playlist_image_url']
             && $data['playlist_user_name']
             && $data['playlist_user_firstname']
         ) {
@@ -30,6 +31,7 @@ final class PlaylistNotification extends Notification
             $playlist = new Playlist(
                 $data['playlist_title'],
                 $user,
+                $data['playlist_image_url'],
                 $data['playlist_description'],
                 $data['playlist_is_public']
             );
@@ -44,8 +46,9 @@ final class PlaylistNotification extends Notification
     {
         $notification = parent::toArray($notification);
 
-        $notification['playlist_title'] = $this->playlist->getTitle();
-        $notification['playlist_user']  =
+        $notification['playlist_title']     = $this->playlist->getTitle();
+        $notification['playlist_image_url'] = $this->playlist->getImageUrl();
+        $notification['playlist_user']      =
             $this->playlist->getUser()->getFirstName()." ".$this->playlist->getUser()->getFirstName();
 
         $notification['description'] = $this->playlist->getDescription();
