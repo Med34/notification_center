@@ -44,11 +44,8 @@ final class TrackNotification extends Notification
     {
         $notification = parent::toArray($notification);
 
-        $notification['notif_content_type']        = 'track';
-        $notification['track_title']               = $this->track->getTitle();
-        $notification['track_nb_views']            = $this->track->getNbViews();
-        $notification['track_album_title']         = $this->track->getAlbum()->getTitle();
-        $notification['track_album_released_date'] = $this->track->getAlbum()->getReleasedDate();
+        $notification['track_title']       = $this->track->getTitle();
+        $notification['track_album_title'] = $this->track->getAlbum()->getTitle();
 
         $notification['track_artists'] = [];
 

@@ -52,13 +52,13 @@ INSERT INTO dev.notification_content_type (name, created_at)
 VALUES ('Playlist', '2023-03-12 16:19:57');
 
 INSERT INTO dev.notification (notification_content_type_id, type, description, validated_at, created_at)
-VALUES (1, 'new content', 'Listen this new album', '2023-03-19 23:59:59', '2023-03-12 23:59:59');
+VALUES (1, 'new content', 'Listen this new album', '2023-03-19 23:59:59', '2022-12-12 23:59:59');
 
 INSERT INTO dev.notification (notification_content_type_id, type, validated_at, created_at)
 VALUES (4, 'sharing', '2023-02-01 23:59:59', '2023-01-01 23:59:59');
 
 INSERT INTO dev.notification (notification_content_type_id, type, description, validated_at, created_at)
-VALUES (2, 'recommendation','Ecoute ce nouveau son, ca devrait te plaire', '2023-04-19 23:59:59', '2023-03-25 23:59:59');
+VALUES (2, 'recommendation','Ecoute ce nouveau son, ca devrait te plaire', '2023-04-19 23:59:59', '2023-02-25 23:59:59');
 
 INSERT INTO dev.notification (notification_content_type_id, type, description, validated_at, created_at)
 VALUES (3, 'update', 'Nouveau podcast a écouter', '2023-04-28 23:59:59', '2023-02-12 23:59:59');

@@ -6,12 +6,13 @@ namespace App\Domain\Model\Notification;
 
 use DateTime;
 use Exception;
+use ReflectionClass;
 
 
 class Notification implements INotification
 {
 
-    private string $type;
+    protected string $type;
 
     private int $isRead;
 
@@ -48,12 +49,55 @@ class Notification implements INotification
     public function toArray(INotification $notification): array
     {
         return [
-            'type'         => $this->type,
-            'is_read'      => $this->isRead,
-            'description'  => $this->description,
-            'created_at'   => $this->createdAt,
-            'validated_at' => $this->validatedAt,
+            'is_read'     => $this->isRead,
+            'description' => $this->description,
+            'created_at'  => $this->createdAt(),
+            'type'        => $this->getType(),
         ];
+    }
+
+    private function createdAt(): string
+    {
+        $now  = new DateTime();
+        $diff = $now->diff($this->createdAt);
+
+        if ($diff->y !== 0) {
+            return $diff->format('Il y a %y year(s)');
+        }
+
+        if ($diff->m !== 0) {
+            return $diff->format('Il y a %m mois(s)');
+        }
+
+        if ($diff->d !== 0) {
+            return $diff->format('Il y a %d jour(s)');
+        }
+
+        return '';
+    }
+
+    private function getType(): string
+    {
+        $type        = '';
+        $reflectionClass = new ReflectionClass($this);
+        $contentType = str_replace('Notification', '', $reflectionClass->getShortName());
+
+        switch ($this->type) {
+            case NotificationType::NEW_CONTENT:
+                $type = "New $contentType";
+                break;
+            case NotificationType::RECOMMENDATION:
+                $type = "Recommended $contentType";
+                break;
+            case NotificationType::SHARING:
+                $type = 'Sharing';
+                break;
+            case NotificationType::UPDATE;
+                $type = "Updated $contentType";
+                break;
+        }
+
+        return $type;
     }
 
 }

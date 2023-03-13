@@ -40,7 +40,6 @@ final class PodcastNotification extends Notification
     {
         $notification = parent::toArray($notification);
 
-        $notification['notif_content_type']  = 'podcast';
         $notification['podcast_title']       = $this->podcast->getTitle();
         $notification['podcast_description'] = $this->podcast->getDescription();
 
@@ -54,5 +53,4 @@ final class PodcastNotification extends Notification
 
         return $notification;
     }
-
 }
