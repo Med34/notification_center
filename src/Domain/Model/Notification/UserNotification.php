@@ -14,7 +14,7 @@ final class UserNotification
     /** @var array<INotification> */
     private array $notifications;
 
-    public function addNotification(INotification $notification) : self
+    public function addNotification(INotification $notification): self
     {
         $this->notifications[] = $notification;
 
@@ -39,4 +39,27 @@ final class UserNotification
 
         return $userNotifications;
     }
+
+    public static function toArray(UserNotification $userNotificationObject): array
+    {
+        $userNotifications = [];
+        $nbUnread          = 0;
+
+        $userNotifications['notifications'] = [];
+
+        foreach ($userNotificationObject->notifications as $userNotification) {
+            $userNotifications['notifications'][] = $userNotification->toArray($userNotification);
+        }
+
+        $userNotifications['nb_notifications'] = count($userNotificationObject->notifications);
+
+        foreach ($userNotifications['notifications'] as $notification) {
+            $nbUnread = $notification['is_read'] === 0 ? $nbUnread + 1 : $nbUnread;
+        }
+
+        $userNotifications['nb_unread_notif'] = $nbUnread;
+
+        return $userNotifications;
+    }
+
 }

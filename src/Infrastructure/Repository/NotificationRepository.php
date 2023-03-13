@@ -26,7 +26,7 @@ final class NotificationRepository implements NotificationRepositoryInterface
                n.description             AS notification_description,
                n.created_at              AS notification_created_at,
                n.validated_at            AS notification_validated_at,
-               un.is_read                AS is_read,
+               un.is_read                AS notification_is_read,
                album.title               AS album_title,
                album.released_date       AS album_released_date,
                artist.name               AS album_artist_name,

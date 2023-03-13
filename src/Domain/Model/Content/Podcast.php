@@ -9,17 +9,31 @@ final class Podcast
 {
 
     public function __construct(
-        private string  $title,
-        private ?string $description
+        private readonly string  $title,
+        private readonly ?string $description,
+        /** @var array<Artist> */
+        private ?array           $artists = []
     ) {
     }
-
-    /** @var array<Artist> */
-    private array $artists;
 
     public function addArtist(Artist $artist): void
     {
         $this->artists[] = $artist;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getArtists(): ?array
+    {
+        return $this->artists;
     }
 
 }

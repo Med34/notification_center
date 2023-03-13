@@ -9,10 +9,25 @@ final class Track
 {
 
     public function __construct(
-        private string $title,
-        private Album  $album,
-        private ?int   $nbViews
+        private readonly string $title,
+        private readonly Album  $album,
+        private readonly ?int   $nbViews
     ) {
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getAlbum(): Album
+    {
+        return $this->album;
+    }
+
+    public function getNbViews(): ?int
+    {
+        return $this->nbViews;
     }
 
 }

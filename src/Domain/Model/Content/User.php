@@ -8,9 +8,19 @@ final class User
 {
 
     public function __construct(
-        private string $name,
-        private string $firstName
+        private readonly string $name,
+        private readonly string $firstName
     ) {
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
     }
 
 }

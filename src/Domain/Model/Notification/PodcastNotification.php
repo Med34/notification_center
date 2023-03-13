@@ -36,4 +36,23 @@ final class PodcastNotification extends Notification
         return $this;
     }
 
+    public function toArray(INotification $notification): array
+    {
+        $notification = parent::toArray($notification);
+
+        $notification['notif_content_type']  = 'podcast';
+        $notification['podcast_title']       = $this->podcast->getTitle();
+        $notification['podcast_description'] = $this->podcast->getDescription();
+
+        $notification['podcast_artists'] = [];
+
+        foreach ($this->podcast->getArtists() as $artist) {
+            $notification['podcast_artists'][] = [
+                'podcast_artist_name' => $artist->getName()." ".$artist->getFirstName(),
+            ];
+        }
+
+        return $notification;
+    }
+
 }

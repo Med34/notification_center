@@ -13,6 +13,8 @@ class Notification implements INotification
 
     private string $type;
 
+    private int $isRead;
+
     private ?string $description;
 
     private ?DateTime $createdAt;
@@ -23,6 +25,7 @@ class Notification implements INotification
     {
         $this->type        = $data['notification_type'];
         $this->description = $data['notification_description'];
+        $this->isRead      = $data['notification_is_read'];
 
         $createdAt   = $data['notification_created_at'];
         $validatedAt = $data['notification_validated_at'];
@@ -40,6 +43,17 @@ class Notification implements INotification
         }
 
         return $this;
+    }
+
+    public function toArray(INotification $notification): array
+    {
+        return [
+            'type'         => $this->type,
+            'is_read'      => $this->isRead,
+            'description'  => $this->description,
+            'created_at'   => $this->createdAt,
+            'validated_at' => $this->validatedAt,
+        ];
     }
 
 }

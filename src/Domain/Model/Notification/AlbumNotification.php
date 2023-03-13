@@ -41,4 +41,23 @@ final class AlbumNotification extends Notification
         return $this;
     }
 
+    public function toArray(INotification $notification): array
+    {
+        $notification = parent::toArray($notification);
+
+        $notification['notif_content_type']  = 'album';
+        $notification['album_title']         = $this->album->getTitle();
+        $notification['album_released_date'] = $this->album->getReleasedDate();
+
+        $notification['album_artists'] = [];
+
+        foreach ($this->album->getArtists() as $artist) {
+            $notification['album_artists'][] = [
+                'album_artist_name' => $artist->getName()." ".$artist->getFirstName(),
+            ];
+        }
+
+        return $notification;
+    }
+
 }

@@ -40,4 +40,19 @@ final class PlaylistNotification extends Notification
         return $this;
     }
 
+    public function toArray(INotification $notification): array
+    {
+        $notification = parent::toArray($notification);
+
+        $notification['notif_content_type'] = 'playlist';
+        $notification['playlist_title']     = $this->playlist->getTitle();
+        $notification['playlist_user']      =
+            $this->playlist->getUser()->getFirstName()." ".$this->playlist->getUser()->getFirstName();
+
+        $notification['description'] = $this->playlist->getDescription();
+        $notification['is_public']   = $this->playlist->getIsPublic();
+
+        return $notification;
+    }
+
 }

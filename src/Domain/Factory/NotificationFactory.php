@@ -38,5 +38,4 @@ final class NotificationFactory
 
         return $notification;
     }
-
 }

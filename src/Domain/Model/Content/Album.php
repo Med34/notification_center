@@ -12,13 +12,12 @@ final class Album
 {
 
     public function __construct(
-        private string   $title,
-        private DateTime $releasedDate
+        private readonly string   $title,
+        private readonly DateTime $releasedDate,
+        /** @var array<Artist> */
+        private array             $artists = []
     ) {
     }
-
-    /** @var array<Artist> */
-    private array $artists;
 
     /** @var array<Track> */
     private array $tracks;
@@ -26,6 +25,21 @@ final class Album
     public function addArtist(Artist $artist): void
     {
         $this->artists[] = $artist;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getReleasedDate(): DateTime
+    {
+        return $this->releasedDate;
+    }
+
+    public function getArtists(): array
+    {
+        return $this->artists;
     }
 
 }
